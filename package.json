@@ -1,16 +1,23 @@
 {
-  "name": "nodejsmorelikenodegays",
+  "name": "mcserverchat",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "tsc",
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
     "bedrock-protocol": "^3.4.0",
     "discord.js": "^12.5.3",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "source-map-loader": "^3.0.0",
+    "ts": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2"
   }
 }
