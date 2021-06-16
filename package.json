@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "mcserverchat",
+=======
+  "name": "MCSERVERCHAT",
+>>>>>>> 97c158c501c652b215c982b3365405626484f8f5
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
