@@ -1,7 +1,7 @@
 # MCBE-SERVER-CHAT
 Clone the repo and run
 `npm install`
-`npm compile`
+`npm run compile`
 Create a .env file with a contents of 
 ```
 TOKEN=
@@ -12,4 +12,4 @@ IP=
 PORT=
 ```
 and fill with the appropriate info
-finally use `npm run`
+finally use `node dist/index.js` to run.
