@@ -13,3 +13,5 @@ PORT=
 ```
 and fill with the appropriate info
 finally use `npm run`
+
+<img src="LOGOTAILVILE.png" alt="drawing" width="200" href="minecraft://?addExternalServer=Tailvile|tailvile.xyz:19132" />

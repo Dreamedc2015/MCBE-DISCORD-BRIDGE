@@ -1,3 +1,4 @@
+{
   "name": "mcserverchat",
   "version": "1.0.0",
   "description": "",
@@ -10,13 +11,14 @@
   "license": "MIT",
   "dependencies": {
     "awesome-typescript-loader": "^5.2.1",
-    "bedrock-protocol": "^3.4.0",
+    "bedrock-protocol": "^3.5.0",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
+    "os": "^0.1.2",
     "source-map-loader": "^3.0.0",
     "ts": "^0.2.2"
   },
   "devDependencies": {
-    "@types/node": "^15.12.2"
+    "@types/node": "^15.14.4"
   }
 }
