@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 {
   "name": "mcserverchat",
-=======
-{  
-"name": "mcserverchat",
->>>>>>> 331088e4c07b2ef578bae239c87a309a24a981e6
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
