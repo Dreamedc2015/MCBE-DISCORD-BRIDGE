@@ -14,3 +14,4 @@ PORT=
 and fill with the appropriate info
 
 finally use `node dist/index.js` to run.
+https://youtu.be/gBhsTbWdbKY
