@@ -14,6 +14,3 @@ PORT=
 and fill with the appropriate info
 
 finally use `node dist/index.js` to run.
-
-# Sponsered by [Tailvile.xyz](minecraft://?addExternalServer=Tailvile|tailvile.xyz:19132)
-<img src="LOGOTAILVILE.png" alt="LOGO" width="200" />
