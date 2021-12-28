@@ -1,6 +1,7 @@
 # MCBE-SERVER-CHAT
 Clone the repo and run
 `npm install`
+`npm update`
 `npm run compile`
 Create a .env file with a contents of 
 ```
