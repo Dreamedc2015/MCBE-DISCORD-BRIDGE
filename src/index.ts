@@ -20,7 +20,7 @@ client.on("join", (packet) => {
     console.log(client.profile);
 });
 client.on("command_output", (packet) => {
-    if (packet.output[1]['message_id'] == 'commands.players.list.names') {
+    if (packet.output[0]['message_id'] == 'commands.players.list.names') {
         var tv = bot.guilds.cache.get(guild);
         tv.channels.cache
             .get(chatchannel)
