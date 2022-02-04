@@ -1,61 +1,73 @@
 const Discord = require("discord.js");
+const PrisAuth = reuire("prismarine-auth");
 require("dotenv").config();
 const bot = new Discord.Client();
 const chatchannel = process.env.CHANNELID;
 const guild = process.env.GUILDID;
 const TOKEN = process.env.TOKEN;
+var tv = bot.guilds.cache.get(guild);
 console.log(Number(String(process.env.PORT)));
 const bedrock = require("bedrock-protocol");
+async function flowauth() {
+    const flow = new PrisAuth.AuthFlow('mcRealmAuth','~/.minecraft/npm-cache/' /* need to remember correct pointer aghhhh'https://pocket-realms.minecraft.net'*/);
+    const tok = await flow.getMsaToken();
+    return(tok);
+}
 let client = bedrock.createClient({
     host: process.env.IP,
     port: Number(String(process.env.PORT)),
     username: process.env.ACCOUNTUSERNAME,
     offline: false,
 });
-client.on("disconnect", (packet) => {
-    client.reconnect;
-});
+//Tries to reconnect in case of a kick or server being full
+//client.on("disconnect", (packet) => {
+//    client.reconnect();
+//});
+
 client.on("join", (packet) => {
     console.log("On Server");
     console.log(client.profile);
 });
+
 client.on("command_output", (packet) => {
     if (packet.output[0]['message_id'] == 'commands.players.list.names') {
-        var tv = bot.guilds.cache.get(guild);
         tv.channels.cache
             .get(chatchannel)
             .send(`${packet.output[0]['parameters'][0]}/${packet.output[0]['parameters'][1]} players online \n \`\`\` ${packet.output[1]['parameters']}\`\`\` `);
     }
 });
+
 client.on("text", (packet) => {
     console.log(Object.getOwnPropertyNames(client.profile));
     if (packet.type == "chat") {
         if (packet.source_name != client.options.username) {
             if (packet.source_name != undefined) {
-                var tv = bot.guilds.cache.get(guild);
                 tv.channels.cache
                     .get(chatchannel)
                     .send(`${packet.source_name}>> ${packet.message}`);
             }
+            
             else {
-                var tv = bot.guilds.cache.get(guild);
                 tv.channels.cache.get(chatchannel).send(`${packet.message}`);
             }
         }
     }
     if (packet.type == "translation") {
-        var tv = bot.guilds.cache.get(guild);
+       
         console.log(packet);
+
         if (packet.message == "§e%multiplayer.player.joined") {
             tv.channels.cache
                 .get(chatchannel)
                 .send(`**${packet.parameters[0]}** has joined the game!`);
         }
+
         if (packet.message == "§e%multiplayer.player.left") {
             tv.channels.cache
                 .get(chatchannel)
                 .send(`**${packet.parameters[0]}** has left the game how sad.`);
         }
+
         if (String(packet.message).includes("death.attack.")) {
             tv.channels.cache
                 .get(chatchannel)
@@ -63,9 +75,25 @@ client.on("text", (packet) => {
         }
     }
 });
+
 bot.on("message", function (message) {
     if (message.channel.id == chatchannel) {
-        if (message.author != bot.user) {
+        //playerlist command, resolves on line 32
+        if (message.content == "playerlist") {
+            client.queue("command_request", {
+                command: `/list`,
+                origin: {
+                    size: 0,
+                    type: 0,
+                    uuid: "",
+                    request_id: "",
+                    player_entity_id: "",
+                },
+                interval: false,
+            });
+        }
+        
+        else if (message.author != bot.user) {
             client.queue("command_request", {
                 command: `/tellraw @a {"rawtext":[{"text":"§r[§9Discord§r] ${message.author.username} >> ${message.content}"}]}`,
                 origin: {
@@ -80,19 +108,6 @@ bot.on("message", function (message) {
         }
     }
 });
-bot.on("message", function (message) {
-    if (message.content == "playerlist") {
-        client.queue("command_request", {
-            command: `/list`,
-            origin: {
-                size: 0,
-                type: 0,
-                uuid: "",
-                request_id: "",
-                player_entity_id: "",
-            },
-            interval: false,
-        });
-    }
-});
+
+
 bot.login(TOKEN);
