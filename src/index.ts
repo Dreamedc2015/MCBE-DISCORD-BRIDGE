@@ -65,7 +65,20 @@ client.on("text", (packet) => {
 });
 bot.on("message", function (message) {
     if (message.channel.id == chatchannel) {
-        if (message.author != bot.user) {
+         if (message.content == "playerlist") {
+            client.queue("command_request", {
+                command: `/list`,
+                origin: {
+                    size: 0,
+                    type: 0,
+                    uuid: "",
+                    request_id: "",
+                    player_entity_id: "",
+                },
+                interval: false,
+        });
+        }
+        else if (message.author != bot.user) {
             client.queue("command_request", {
                 command: `/tellraw @a {"rawtext":[{"text":"§r[§9Discord§r] ${message.author.username} >> ${message.content}"}]}`,
                 origin: {
@@ -78,21 +91,6 @@ bot.on("message", function (message) {
                 interval: false,
             });
         }
-    }
-});
-bot.on("message", function (message) {
-    if (message.content == "playerlist") {
-        client.queue("command_request", {
-            command: `/list`,
-            origin: {
-                size: 0,
-                type: 0,
-                uuid: "",
-                request_id: "",
-                player_entity_id: "",
-            },
-            interval: false,
-        });
     }
 });
 bot.login(TOKEN);
